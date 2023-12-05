@@ -1,0 +1,9 @@
+{
+  "manifest_version": 3,
+  "name": "Travel Assistant",
+  "version": "1.0",
+  "description": "Travel assistant extension.",
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
