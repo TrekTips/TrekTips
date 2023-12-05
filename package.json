@@ -2,10 +2,11 @@
   "name": "reinforcement",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "client/src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --mode production"
+    "start": "node server/server.js",
+    "build": "webpack --mode production",
+    "dev": "nodemon server/server.js & webpack-dev-server"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +18,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.23.5",
+    "@babel/plugin-transform-runtime": "^7.23.4",
     "@babel/preset-env": "^7.23.5",
     "@babel/preset-react": "^7.23.3",
     "babel-loader": "^9.1.3",

@@ -3,12 +3,15 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: '/src/index.js',
-  mode: process.env.NODE_ENV,
+  entry: './client/src/index.js',
+  mode: 'development',
+  devtool:'eval-source-map',
+
   output: {
-    path: path.join(__dirname, '/dist'),
+    path: path.join(__dirname, '/build'),
     filename: 'bundle.js',
   },
+
   module: {
     rules: [
       {
@@ -32,21 +35,28 @@ module.exports = {
       },
     ],
   },
+
   plugins: [
     new HTMLWebpackPlugin({
-      template: './popup.html',
+      template: './client/src/popup.html',
       filename: 'popup.html',
     }),
     new CopyPlugin({
       patterns: [{ from: './manifest.json', to: 'manifest.json' }],
     }),
   ],
+
   devServer: {
-    port: 8080,
+    static: {
+      directory: path.resolve(__dirname, 'build'),
+      publicPath: '/',
+    },
+
     proxy: {
-      '/': 'http://localhost:1234',
+      '/': 'http://localhost:3000/',
     },
   },
+
   resolve: {
     extensions: ['.js', '.jsx', '.scss'],
   },
