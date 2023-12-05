@@ -38,8 +38,8 @@ module.exports = {
 
   plugins: [
     new HTMLWebpackPlugin({
-      template: './client/src/popup.html',
-      filename: 'popup.html',
+      template: './client/src/index.html',
+      filename: 'index.html',
     }),
     new CopyPlugin({
       patterns: [{ from: './manifest.json', to: 'manifest.json' }],
