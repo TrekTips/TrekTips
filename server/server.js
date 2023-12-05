@@ -2,7 +2,8 @@ const PORT = process.env.PORT || 3000;
 const express = require('express');
 const path = require('path');
 const app = express();
-const cityController = require('./cityController');
+const cityController = require('/cityController');
+const recController = require('/recController');
 
 // Basic Routes
 app.use(express.json());
@@ -15,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 const { addCity, removeCity } = cityController;
 
 app.post('/cities', addCity, (req, res) => {});
-app.delete('/cities', addCity, (req, res) => {});
+app.delete('/cities', removeCity, (req, res) => {});
 
 // Global 404 error
 app.all('*', (req, res) => {
