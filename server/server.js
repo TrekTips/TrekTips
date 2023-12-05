@@ -14,6 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 //  Routes Here
 
 const { addCity, removeCity } = cityController;
+const { addRec, removeRec } = recController;
 
 app.post('/cities', addCity, (req, res) => {});
 app.delete('/cities', removeCity, (req, res) => {});
