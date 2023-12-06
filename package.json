@@ -1,5 +1,5 @@
 {
-  "name": "reinforcement",
+  "name": "TrekTips",
   "version": "1.0.0",
   "description": "",
   "main": "client/src/index.js",
@@ -14,6 +14,7 @@
   "dependencies": {
     "bable-loader": "^0.0.1-security",
     "express": "^4.18.2",
+    "mongoose": "^8.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.1"
