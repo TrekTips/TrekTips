@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import CityDetails from './CityDetails';
+import { BrowserRouter as Link, Router, Routes, Route } from 'react-router-dom';
 
 const TravelBucketList = () => {
   const [newCity, setNewCity] = useState('');
@@ -49,7 +50,7 @@ const TravelBucketList = () => {
         <ul>
           {cities.map((city) => (
             <li key={city.id}>
-              <span onClick={() => handleCityClick(city)}>{city.name}</span>
+              <button onClick={() => handleCityClick(city)}>{city.name}</button>
               <button onClick={() => handleDeleteCity(city.id)}>remove</button>
             </li>
           ))}

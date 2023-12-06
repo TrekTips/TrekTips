@@ -4,9 +4,9 @@
   "description": "",
   "main": "client/src/index.js",
   "scripts": {
-    "start": "node server/server.js",
-    "build": "webpack --mode production",
-    "dev": "nodemon server/server.js & webpack-dev-server"
+    "start": "NODE_ENV=production node server/server.js",
+    "build": "NODE_ENV=production webpack",
+    "dev": "NODE_ENV=development nodemon server/server.js & NODE_ENV=development webpack-dev-server"
   },
   "keywords": [],
   "author": "",
@@ -15,7 +15,8 @@
     "bable-loader": "^0.0.1-security",
     "express": "^4.18.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.20.1"
   },
   "devDependencies": {
     "@babel/core": "^7.23.5",

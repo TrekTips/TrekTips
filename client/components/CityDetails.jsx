@@ -18,9 +18,9 @@ const CityDetails = ({ city, onClose }) => {
 
   const handleGetRecommendations = async () => {
     // Fetch data from your API (replace the URL with your actual API endpoint)
-    const response = await fetch('https://api.example.com/recommendations');
-    const data = await response.json();
-    // const data = ["dai", "ia", "chich"]
+    // const response = await fetch('https://api.example.com/recommendations');
+    // const data = await response.json();
+    const data = ["dai", "ia", "chich"]
     // Assuming the API response is an array of recommendations
     setThingsToDo((prevThings) => [...prevThings, ...data]);
   };

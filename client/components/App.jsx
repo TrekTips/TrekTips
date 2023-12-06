@@ -1,6 +1,7 @@
 import React from 'react';
 import TravelBucketList from './TravelBucketList.jsx';
 // import Header from './Header.jsx';
+import '../src/styles.css';
 
 
 
