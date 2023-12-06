@@ -8,7 +8,8 @@ const recController = require('./Controllers/recController');
 const mongoose = require('mongoose');
 const { MONGODB_URI } = require('./config');
 
-// MongoDB connection
+/* ************************************ CONNECT TO MONGO ********************************** */
+
 mongoose
   .connect(MONGODB_URI)
   .then(() => {
@@ -18,7 +19,7 @@ mongoose
     console.error('Error connecting to MongoDB: ' + error);
   });
 
-/* ********************************** PARSE INCOMING JSON AND URL ENCODED ********************************** */
+/* ************************** PARSE INCOMING JSON AND URL ENCODED ************************* */
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -38,7 +39,7 @@ const { addCity, removeCity } = cityController;
 const { addRec, removeRec } = itemController;
 const { getRecs } = recController;
 
-/* ********************************** SERVER ROUTES********************************** */
+/* ************************************* SERVER ROUTES************************************* */
 
 // app.post('/cities', addCity, (req, res) => {});
 // app.delete('/cities', removeCity, (req, res) => {});
@@ -53,7 +54,7 @@ app.all('*', (req, res) => {
   res.status(404).send('The page you are looking for does not exist');
 });
 
-/* ********************************** GLOBAL ERROR HANDLER ********************************** */
+/* ********************************* GLOBAL ERROR HANDLER ********************************* */
 
 app.use((err, req, res, next) => {
   //default obj
