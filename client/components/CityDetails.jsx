@@ -22,12 +22,32 @@ const CityDetails = ({ city, onClose }) => {
   };
 
   const handleGetRecommendations = async () => {
-    // Fetch data from your API (replace the URL with your actual API endpoint)
-    // const response = await fetch('https://api.example.com/recommendations');
-    // const data = await response.json();
-    const data = ["dai", "ia", "chich"]
-    // Assuming the API response is an array of recommendations
-    setThingsToDo((prevThings) => [...prevThings, ...data]);
+    try {
+      // Replace 'your-openai-api-key' with your actual OpenAI API key
+      const apiKey = '';
+      const response = await fetch('https://api.openai.com/v1/engines/davinci/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+          prompt: `One fun and real place to see when you visit ${city.name} is:`,
+          max_tokens: 25, // Adjust the max_tokens parameter based on your requirements
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        // Extract the generated text from the OpenAI response and add it to thingsToDo
+        console.log(data);
+        setThingsToDo((prevThings) => [...prevThings, data.choices[0].text]);
+      } else {
+        console.error('Error fetching recommendations:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error fetching recommendations:', error);
+    }
   };
 
   const handleToggleAddThingBox = () => {
