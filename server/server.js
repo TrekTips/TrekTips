@@ -2,9 +2,9 @@ const PORT = process.env.PORT || 3000;
 const express = require('express');
 const path = require('path');
 const app = express();
-const cityController = require('/cityController');
-const itemController = require('/itemController');
-const recController = require('/recController');
+const cityController = require('./Controllers/cityController');
+const itemController = require('./Controllers/itemController');
+const recController = require('./Controllers/recController');
 const mongoose = require('mongoose');
 const { MONGODB_URI } = require('./config');
 

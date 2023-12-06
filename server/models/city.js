@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const citySchema = new mongoose.Schema({
+const CitySchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -13,6 +13,6 @@ const citySchema = new mongoose.Schema({
   created_at: { type: Date, default: Date.now },
 });
 
-const City = mongoose.model('City', citySchema);
+const City = mongoose.model('City', CitySchema);
 
 module.exports = City;
