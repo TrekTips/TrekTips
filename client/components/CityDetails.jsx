@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import styles from '../src/styles/CityDetails.module.css';
 
 const CityDetails = ({ city, onClose }) => {
   const [thingsToDo, setThingsToDo] = useState([]);
@@ -9,39 +10,43 @@ const CityDetails = ({ city, onClose }) => {
   useEffect(() => {
     setThingsToDo([]); // Reset thingsToDo when a new city is selected
   }, [city]);
-  
+
   const handleAddThing = () => {
     if (newThing.trim() !== '') {
-      setThingsToDo((prevThings) => [...prevThings, newThing]);
+      setThingsToDo(prevThings => [...prevThings, newThing]);
       setNewThing('');
     }
   };
 
-  const handleRemoveThing = (index) => {
-    setThingsToDo((prevThings) => prevThings.filter((_, i) => i !== index));
+  const handleRemoveThing = index => {
+    setThingsToDo(prevThings => prevThings.filter((_, i) => i !== index));
   };
 
   const handleGetRecommendations = async () => {
     try {
       // Replace 'your-openai-api-key' with your actual OpenAI API key
-      const apiKey = '';
-      const response = await fetch('https://api.openai.com/v1/engines/davinci/completions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`,
+      const apiKey = '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';
+      const response = await fetch(
+        'https://api.openai.com/v1/engines/davinci/completions',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${apiKey}`,
+          },
+          body: JSON.stringify({
+            // The responses to these prompts are potentially unhinged as this is an un-tuned request, tread carefully.
+            prompt: `I can't wait to go to ${city.name} and see wonderful attractions such as`,
+            max_tokens: 25, // Adjust the max_tokens parameter based on your requirements
+          }),
         },
-        body: JSON.stringify({
-          prompt: `One fun and real place to see when you visit ${city.name} is:`,
-          max_tokens: 25, // Adjust the max_tokens parameter based on your requirements
-        }),
-      });
+      );
 
       if (response.ok) {
         const data = await response.json();
         // Extract the generated text from the OpenAI response and add it to thingsToDo
         console.log(data);
-        setThingsToDo((prevThings) => [...prevThings, data.choices[0].text]);
+        setThingsToDo(prevThings => [...prevThings, data.choices[0].text]);
       } else {
         console.error('Error fetching recommendations:', response.statusText);
       }
@@ -51,22 +56,26 @@ const CityDetails = ({ city, onClose }) => {
   };
 
   const handleToggleAddThingBox = () => {
-    setShowAddThingBox((prev) => !prev);
+    setShowAddThingBox(prev => !prev);
   };
 
   return (
-    <div className="city-details">
-      <div className="header">
+    <div className={styles.CityDetails}>
+      <div className='header'>
         <h2>{city.name}</h2>
         <button onClick={onClose}>X</button>
       </div>
-      <div className="things-to-do">
+      <div className='things-to-do'>
         <h3>Things to Do:</h3>
         <ul>
           {thingsToDo.map((thing, index) => (
             <li key={index}>
-                {thing}
-                <button onClick={() => handleRemoveThing(index)}>Remove</button>
+              {thing}
+              <button
+                className={styles.cityRemove}
+                onClick={() => handleRemoveThing(index)}>
+                Remove
+              </button>
             </li>
           ))}
         </ul>
@@ -74,9 +83,9 @@ const CityDetails = ({ city, onClose }) => {
         {showAddThingBox && (
           <div>
             <textarea
-              placeholder="Enter a new thing to do"
+              placeholder='Enter a new thing to do'
               value={newThing}
-              onChange={(e) => setNewThing(e.target.value)}
+              onChange={e => setNewThing(e.target.value)}
             />
             <button onClick={handleAddThing}>Add</button>
           </div>

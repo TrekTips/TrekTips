@@ -1,0 +1,12 @@
+.CityDetails {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: flex-start;
+  .cityRemove {
+    display: flex;
+    justify-content: center;
+    background-color: darkred;
+    width: 100px;
+  }
+}
