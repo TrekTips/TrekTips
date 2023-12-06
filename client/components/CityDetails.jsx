@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const CityDetails = ({ city, onClose }) => {
   const [thingsToDo, setThingsToDo] = useState([]);
   const [newThing, setNewThing] = useState('');
   const [showAddThingBox, setShowAddThingBox] = useState(false);
 
+  // Update thingsToDo when the city prop changes
+  useEffect(() => {
+    setThingsToDo([]); // Reset thingsToDo when a new city is selected
+  }, [city]);
+  
   const handleAddThing = () => {
     if (newThing.trim() !== '') {
       setThingsToDo((prevThings) => [...prevThings, newThing]);

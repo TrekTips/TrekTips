@@ -11,7 +11,6 @@ function App() {
 
   return (
     <div className="app">
-      {/* <Header /> */}
       <TravelBucketList />
     </div>
   );
