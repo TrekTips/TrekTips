@@ -42,13 +42,13 @@ const { getRecs } = recController;
 
 //add route here for getting all cities on load
 
-app.post('/cities', addCity, (req, res) => {});
-app.delete('/cities', removeCity, (req, res) => {});
+// app.post('/cities', addCity, (req, res) => {});
+// app.delete('/cities', removeCity, (req, res) => {});
 
-app.post('/items', addRec, (req, res) => {});
-app.delete('/items', removeRec, (req, res) => {});
+// app.post('/items', addRec, (req, res) => {});
+// app.delete('/items', removeRec, (req, res) => {});
 
-app.post('/recs', getRecs, (req, res) => {});
+// app.post('/recs', getRecs, (req, res) => {});
 
 // Route not found
 app.all('*', (req, res) => {
