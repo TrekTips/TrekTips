@@ -2,6 +2,9 @@ const PORT = process.env.PORT || 3000;
 const express = require('express');
 const path = require('path');
 const app = express();
+const cityController = require('/cityController');
+const itemController = require('/itemController');
+const recController = require('/recController');
 const mongoose = require('mongoose');
 const { MONGODB_URI } = require('./config');
 
@@ -14,32 +17,52 @@ mongoose
   .catch(error => {
     console.error('Error connecting to MongoDB: ' + error);
   });
-const cityController = require('/cityController');
-const recController = require('/recController');
 
-// Basic Routes
+/* ********************************** PARSE INCOMING JSON AND URL ENCODED ********************************** */
+
 app.use(express.json());
 app.use('/', express.static(path.resolve(__dirname, '../build')));
+
+/* ********************************** SERVE STATIC FILES ********************************** */
 app.use(express.static(path.resolve(__dirname, '../client')));
 app.use(express.urlencoded({ extended: true }));
 
-//  Routes Here
+/* ********************************** DESTRUCTURE CONTROLLERS ********************************** */
 
 const { addCity, removeCity } = cityController;
-const { addRec, removeRec } = recController;
+const { addRec, removeRec } = itemController;
+const { getRecs } = recController;
+
+/* ********************************** SERVER ROUTES********************************** */
 
 app.post('/cities', addCity, (req, res) => {});
 app.delete('/cities', removeCity, (req, res) => {});
 
-// Global 404 error
+app.post('/items', addRec, (req, res) => {});
+app.delete('/items', removeRec, (req, res) => {});
+
+app.post('/recs', getRecs, (req, res) => {});
+
+// Route not found
 app.all('*', (req, res) => {
   res.status(404).send('The page you are looking for does not exist');
 });
 
-// Global error handler
+/* ********************************** GLOBAL ERROR HANDLER ********************************** */
+
 app.use((err, req, res, next) => {
-  res.status(err.status || 500).json({ error: err.message });
+  //default obj
+  const globalErrObj = {
+    log: 'error with middleware',
+    status: 500,
+    message: 'there was an error',
+  };
+  //err obj. overwrite default obj with err obj from middleware
+  const errObj = { ...globalErrObj, ...err };
+  res.status(errObj.status).send(errObj.message);
 });
+
+/* ********************************** CONNECT TO EXPRESS ********************************** */
 
 const server = app.listen(PORT, () =>
   console.log(`Server is listening on port ${PORT}`),

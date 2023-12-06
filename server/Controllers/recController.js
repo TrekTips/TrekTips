@@ -1,6 +1,6 @@
 recController = {};
 
-recController.addRec = async function () {
+recController.getRecs = async function () {
   try {
     //mongo create
   } catch (err) {
@@ -8,11 +8,4 @@ recController.addRec = async function () {
   }
 };
 
-recController.removeRec = async function () {
-  try {
-    //mongo delete
-  } catch (err) {
-    console.log(err);
-  }
-};
 module.exports = recController;
