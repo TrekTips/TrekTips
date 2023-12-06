@@ -1,6 +1,6 @@
 const cityController = {};
 
-cityController.addCity = async function () {
+cityController.addCity = async function (req, res, next) {
   try {
     //mongo create
   } catch (err) {
@@ -8,7 +8,7 @@ cityController.addCity = async function () {
   }
 };
 
-cityController.removeCity = async function () {
+cityController.removeCity = async function (req, res, next) {
   try {
     //mongo delete
   } catch (err) {

@@ -1,6 +1,6 @@
 itemController = {};
 
-itemController.addItem = async function () {
+itemController.addItem = async function (res, res, next) {
   try {
     //mongo create
   } catch (err) {
@@ -8,7 +8,7 @@ itemController.addItem = async function () {
   }
 };
 
-itemController.removeItem = async function () {
+itemController.removeItem = async function (req, res, next) {
   try {
     //mongo delete
   } catch (err) {
