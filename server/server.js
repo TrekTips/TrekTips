@@ -21,13 +21,18 @@ mongoose
 /* ********************************** PARSE INCOMING JSON AND URL ENCODED ********************************** */
 
 app.use(express.json());
-app.use('/', express.static(path.resolve(__dirname, '../build')));
-
-/* ********************************** SERVE STATIC FILES ********************************** */
-app.use(express.static(path.resolve(__dirname, '../client')));
 app.use(express.urlencoded({ extended: true }));
 
-/* ********************************** DESTRUCTURE CONTROLLERS ********************************** */
+/* ********************************** SERVE STATIC FILES ********************************** */
+// Webpack sets the NODE_ENV value based on which script is run in package.json "scripts"
+// If NODE_ENV gets set to "production", serve files from the build folder
+// If NODE_END gets set to "development", serve files from the client folder
+// This eliminates the size warnings during the webpack compile process
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.resolve(__dirname, '../build')));
+} else {
+  app.use(express.static(path.resolve(__dirname, '../client')));
+}
 
 const { addCity, removeCity } = cityController;
 const { addRec, removeRec } = itemController;

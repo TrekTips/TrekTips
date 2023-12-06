@@ -4,8 +4,8 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './client/src/index.js',
-  mode: 'development',
-  devtool: 'eval-source-map',
+  mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
+  devtool: process.env.NODE_ENV === 'development' ? 'eval-source-map' : false,
 
   output: {
     path: path.join(__dirname, '/build'),
