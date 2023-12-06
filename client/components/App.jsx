@@ -1,19 +1,20 @@
 import React from 'react';
-import TravelBucketList from './TravelBucketList.jsx';
-// import Header from './Header.jsx';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import TravelBucketList from './TravelBucketList';
+import CityDetails from './CityDetails';
 import '../src/styles.css';
 
 
-
 function App() {
-
-  // const [headerText, setHeaderText] = useState('Travel Bucket List')
-
   return (
-    <div className="app">
-      {/* <Header /> */}
-      <TravelBucketList />
-    </div>
+    <BrowserRouter>
+      <div className="app">
+        <Routes>
+          <Route path="/" element={<TravelBucketList />} />
+          <Route path="/cities/:cityId" element={<CityDetails />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

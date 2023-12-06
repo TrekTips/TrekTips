@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import CityDetails from './CityDetails';
-import { BrowserRouter as Link, Router, Routes, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const TravelBucketList = () => {
   const [newCity, setNewCity] = useState('');
@@ -12,7 +12,7 @@ const TravelBucketList = () => {
   const handleAddCity = () => {
     // if no city is entered, don't do anything
     if (newCity.trim() !== '') { 
-      setCities((prevCities) => [...prevCities, { name: newCity, id: Date.now() }]);
+      setCities((prevCities) => [...prevCities, { name: newCity, id: prevCities.length + 1 }]);
       setNewCity(''); // reset text box to empty after we add city
     }
   };
@@ -37,6 +37,7 @@ const TravelBucketList = () => {
 
   return (
     <div className="travel-bucket-list">
+      <h3>Travel Bucket List</h3>
       <div>
         <button onClick={handleAddCity}>Add City</button>
         <textarea
@@ -50,7 +51,10 @@ const TravelBucketList = () => {
         <ul>
           {cities.map((city) => (
             <li key={city.id}>
-              <button onClick={() => handleCityClick(city)}>{city.name}</button>
+              <Link to={`/cities/${city.id}`}>
+                {city.name}
+              </Link>
+              {/* <button onClick={() => handleCityClick(city)}>{city.name}</button> */}
               <button onClick={() => handleDeleteCity(city.id)}>remove</button>
             </li>
           ))}
