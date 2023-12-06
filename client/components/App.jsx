@@ -1,14 +1,20 @@
 import React from 'react';
-import Popup from './popup.jsx';
+import TravelBucketList from './TravelBucketList.jsx';
+// import Header from './Header.jsx';
+import '../src/styles.css';
 
-const App = () => {
+
+
+function App() {
+
+  // const [headerText, setHeaderText] = useState('Travel Bucket List')
+
   return (
-    <div>
-      <h1>Travel Assistant</h1>
-      {/* UI elements here */}
-      <Popup />
+    <div className="app">
+      {/* <Header /> */}
+      <TravelBucketList />
     </div>
   );
-};
+}
 
 export default App;
